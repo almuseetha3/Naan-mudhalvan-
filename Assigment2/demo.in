@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="type="text/css" href=":styles.css">
+css"href="styles.css">
+</head>
+<body>
+    <header>
+          <h1>job search</h1>
+          <input type="text"
+id="searchInput" placeholder="search for job">
+<button onclick="searchjobs()">search</button>
+</header>
+<div id="jobListings will be displayed here -->
+</div>
+<aside>
+     <h2>Filter jobs</h2>
+<label for="location">Location:</label>
+<select id="location">
+<option value="All">All</option>
+<option value="new york">new york</option>
+<option value="san Francisco">san Francisco</option>
+<!--Add more option as needed-->
+</select>
+<label for="jobType">job type:</label>
+<select id="jobtype">
+<option value="All">All</option>
+<option value="Full-time</option>
+<option value="part=time">part -time</option>
+<!--Add more option as needed-->
+</select>
+</aside>
+<script src="script.js"></script>
+</body>
+</html>body{
+font-family:Arial,sans-serif;
+}
+header{
+background-color: #0074d9;
+color: white;
+padding: 10px;
+text-align: center;
+}
+# searchInput{
+padding: 5px;
+margin: 5px;
+}
+button{
+background-color: #4CAF50;
+color: white;
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+}
+#jobListings {
+margin: 20px;
+}
+aside{
+background-color: #f0f0f0;
+padding: 10px;
+}
+select{
+width: 100%;
+padding: 5px;
+marign: 5px;
+}
+// sample job data(you can replace this with actual data from an API)
+const jobdata=[
+{title:"sotware developer",
+location:"new york",jobtype:"full-time"},
+{title:"Graphic designer",
+location:"san Francisco",jobType:"Part-time"},
+// Add more job listings here];
+function searchjobs(){
+const searchInput=document.getElementById("searchInput").value;
+const locationFilter=document.getElementById("location").value;
+const jobTypeFilter=document.getElementById("jobType").value;
+// Filter job listings based on user input
+const filteredjobs=jobData.filter(job => {
+return(
+(searchInput ===""||
+job.title.tolowercase().includes(searchInput.tolowercase()))&&(locationFilter ==="All"||
+job.location === locationFilter)&&(jobTypeFilter ==="All"||
+job.jobType === jobTypeFilter);
+});
+displayjobs(filteredjobs);
+}
+function displayjobs(jobs){
+const joblistings=document.getElementById("joblistings");
+joblistings.innerHTML="";
+if(jobs.length === 0){
+joblistings.innerHTML="<p>No
+jobs found.</p>";
+}else{
+jobs.forEach(job =>{
+const jobItem=document.createElement("div");
+jobItem.innerHTML='<h3>$
+{job.title}</h3><p>Location:$
+{job.location}<br>job type:$
+{job.jobType}</p>';
+joblistings.appendchild(jobItem);
+});
+}
+}
+// intialize the job listing on page load
+displayjobs(jobData);
